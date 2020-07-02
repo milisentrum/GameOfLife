@@ -63,11 +63,26 @@ namespace WindowsFormsApp2
         {
             graphics.Clear(Color.Black);
 
+            bool[,] newField = new bool[cols, rows];
+
             for (int x = 0; x < cols; x++)
             {
                 for (int y = 0; y < rows; y++)
                 {
-                    if (field[x, y])
+                    int neighbours = CountNeighbours(x, y);
+                    bool hasLife = field[x, y];
+
+                    if (!hasLife && neighbours == 3)
+                        newField[x, y] = true;
+                    else
+                    {
+                        if (hasLife && (neighbours < 2 || neighbours > 3))
+                            newField[x, y] = false;
+                        else
+                            newField[x, y] = field[x, y];
+                    }
+
+                    if (hasLife)
                     {
                         //отрисовка живой клетки
                         graphics.FillRectangle(Brushes.CornflowerBlue, x * resolution, y * resolution, resolution, resolution);
@@ -76,7 +91,32 @@ namespace WindowsFormsApp2
                 }
             }
 
+            field = newField;
+            pictureBox1.Refresh();
         }
+
+        private int CountNeighbours(int x, int y)
+        {
+            int count = 0;
+
+            for (int i = -1; i < 2; i++)
+            {
+                for (int j = -1; j < 2; j++)
+                {
+                    int col = x + i;
+                    int row = y + j;
+
+                    bool isSelfChecking = col == x && row == y;
+                    bool hasLife = field[col, row];
+
+                    if (hasLife && !isSelfChecking)
+                        count++;
+                }
+            }
+                
+            return 0;
+        }
+
 
         private void StopGame()
         {
