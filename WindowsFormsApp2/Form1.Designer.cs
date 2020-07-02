@@ -30,21 +30,21 @@
         {
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnStart = new System.Windows.Forms.Button();
-            this.nudResolution = new System.Windows.Forms.NumericUpDown();
+            this.btnstop = new System.Windows.Forms.Button();
             this.nudDancity = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnstop = new System.Windows.Forms.Button();
+            this.nudResolution = new System.Windows.Forms.NumericUpDown();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudResolution)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDancity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudResolution)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -72,53 +72,16 @@
             this.splitContainer1.SplitterDistance = 191;
             this.splitContainer1.TabIndex = 0;
             // 
-            // pictureBox1
+            // btnstop
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(576, 419);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(35, 53);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Resolution\r\n";
-            // 
-            // btnStart
-            // 
-            this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnStart.Location = new System.Drawing.Point(18, 268);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(137, 38);
-            this.btnStart.TabIndex = 1;
-            this.btnStart.Text = "start";
-            this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            // 
-            // nudResolution
-            // 
-            this.nudResolution.Location = new System.Drawing.Point(18, 93);
-            this.nudResolution.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudResolution.Name = "nudResolution";
-            this.nudResolution.Size = new System.Drawing.Size(120, 20);
-            this.nudResolution.TabIndex = 2;
-            this.nudResolution.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nudResolution.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
+            this.btnstop.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnstop.Location = new System.Drawing.Point(18, 335);
+            this.btnstop.Name = "btnstop";
+            this.btnstop.Size = new System.Drawing.Size(137, 38);
+            this.btnstop.TabIndex = 5;
+            this.btnstop.Text = "stop\r\n\r\n";
+            this.btnstop.UseVisualStyleBackColor = true;
+            this.btnstop.Click += new System.EventHandler(this.btnstop_Click);
             // 
             // nudDancity
             // 
@@ -153,16 +116,54 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Dancity";
             // 
-            // btnstop
+            // nudResolution
             // 
-            this.btnstop.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnstop.Location = new System.Drawing.Point(18, 335);
-            this.btnstop.Name = "btnstop";
-            this.btnstop.Size = new System.Drawing.Size(137, 38);
-            this.btnstop.TabIndex = 5;
-            this.btnstop.Text = "stop\r\n\r\n";
-            this.btnstop.UseVisualStyleBackColor = true;
-            this.btnstop.Click += new System.EventHandler(this.btnstop_Click);
+            this.nudResolution.Location = new System.Drawing.Point(18, 93);
+            this.nudResolution.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudResolution.Name = "nudResolution";
+            this.nudResolution.Size = new System.Drawing.Size(120, 20);
+            this.nudResolution.TabIndex = 2;
+            this.nudResolution.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudResolution.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            // 
+            // btnStart
+            // 
+            this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnStart.Location = new System.Drawing.Point(18, 268);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(137, 38);
+            this.btnStart.TabIndex = 1;
+            this.btnStart.Text = "start";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(35, 53);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(85, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Resolution\r\n";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(576, 419);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             // 
             // timer1
             // 
@@ -177,14 +178,16 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudResolution)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDancity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudResolution)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

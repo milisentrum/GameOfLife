@@ -18,6 +18,7 @@ namespace WindowsFormsApp2
         private Graphics graphics;
         private int rows;
         private int cols;
+        private int currentGeneration = 0;
 
         public Form1()
         {
@@ -32,6 +33,8 @@ namespace WindowsFormsApp2
 
             nudResolution.Enabled = false;
             nudDancity.Enabled = false;
+
+            currentGeneration = 0;
 
             resolution = (int)nudResolution.Value;
             pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
@@ -93,6 +96,7 @@ namespace WindowsFormsApp2
 
             field = newField;
             pictureBox1.Refresh();
+            Text = $"Generation {++currentGeneration}";
         }
 
         private int CountNeighbours(int x, int y)
@@ -103,10 +107,12 @@ namespace WindowsFormsApp2
             {
                 for (int j = -1; j < 2; j++)
                 {
-                    int col = x + i;
-                    int row = y + j;
+                    int col = (x + i + cols) % cols;
+                    int row = (y + j + rows) % rows;
 
                     bool isSelfChecking = col == x && row == y;
+
+
                     bool hasLife = field[col, row];
 
                     if (hasLife && !isSelfChecking)
@@ -114,7 +120,7 @@ namespace WindowsFormsApp2
                 }
             }
                 
-            return 0;
+            return count;
         }
 
 
@@ -144,6 +150,45 @@ namespace WindowsFormsApp2
         private void timer1_Tick(object sender, EventArgs e)
         {
             NextGeneration();
-        }       
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!timer1.Enabled)
+                return;
+
+
+
+            if(e.Button==MouseButtons.Left)
+            {
+                var x = e.Location.X / resolution;
+                var y = e.Location.Y / resolution;
+                bool validationPassed = ValidateMousePosition(x, y);
+                if(validationPassed)
+                 field[x, y] = true;
+
+            }
+
+            if (e.Button == MouseButtons.Right)
+            {
+                var x = e.Location.X / resolution;
+                var y = e.Location.Y / resolution;
+                bool validationPassed = ValidateMousePosition(x, y);
+                if (validationPassed)
+                field[x, y] = false;
+
+            }
+        }
+
+
+        private bool ValidateMousePosition(int x, int y)
+        {
+            return x >= 0 && y >= 0 && x < cols && y < rows;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Text = "Conway's Game Of Life";
+        }
     }
 }
