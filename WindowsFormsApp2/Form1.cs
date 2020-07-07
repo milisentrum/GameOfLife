@@ -14,7 +14,8 @@ namespace WindowsFormsApp2
     {
 
         private int resolution;
-        private bool[,] field;
+        private int[,] currentField;
+        private int[,] newField;
         private Graphics graphics;
         private int rows;
         private int cols;
@@ -43,7 +44,7 @@ namespace WindowsFormsApp2
             rows = pictureBox1.Height / resolution;
             cols = pictureBox1.Width / resolution;
 
-            field = new bool[cols, rows];
+            currentField = new bool[cols, rows];
 
             //первое поколение
             Random rand = new Random();
@@ -51,8 +52,8 @@ namespace WindowsFormsApp2
             {
                 for (int y = 0; y < rows; y++)
                 {
-                    field[x, y] = rand.Next((int)nudDancity.Value) == 0;
-                    if (field[x, y])
+                    currentField[x, y] = rand.Next((int)nudDancity.Value) == 0;
+                    if (currentField[x, y])
                     {
                         //graphics.FillRectangle(Brushes.CornflowerBlue, x * resolution, y * resolution, resolution, resolution);
                     }
@@ -73,7 +74,7 @@ namespace WindowsFormsApp2
                 for (int y = 0; y < rows; y++)
                 {
                     int neighbours = CountNeighbours(x, y);
-                    bool hasLife = field[x, y];
+                    bool hasLife = currentField[x, y];
 
                     if (!hasLife && neighbours == 3)
                         newField[x, y] = true;
@@ -82,7 +83,7 @@ namespace WindowsFormsApp2
                         if (hasLife && (neighbours < 2 || neighbours > 3))
                             newField[x, y] = false;
                         else
-                            newField[x, y] = field[x, y];
+                            newField[x, y] = currentField[x, y];
                     }
 
                     if (hasLife)
@@ -94,7 +95,7 @@ namespace WindowsFormsApp2
                 }
             }
 
-            field = newField;
+            currentField = newField;
             pictureBox1.Refresh();
             Text = $"Generation {++currentGeneration}";
         }
@@ -113,7 +114,7 @@ namespace WindowsFormsApp2
                     bool isSelfChecking = col == x && row == y;
 
 
-                    bool hasLife = field[col, row];
+                    bool hasLife = currentField[col, row];
 
                     if (hasLife && !isSelfChecking)
                         count++;
@@ -122,7 +123,6 @@ namespace WindowsFormsApp2
                 
             return count;
         }
-
 
         private void StopGame()
         {
@@ -157,15 +157,13 @@ namespace WindowsFormsApp2
             if (!timer1.Enabled)
                 return;
 
-
-
             if(e.Button==MouseButtons.Left)
             {
                 var x = e.Location.X / resolution;
                 var y = e.Location.Y / resolution;
                 bool validationPassed = ValidateMousePosition(x, y);
                 if(validationPassed)
-                 field[x, y] = true;
+                 currentField[x, y] = true;
 
             }
 
@@ -175,11 +173,10 @@ namespace WindowsFormsApp2
                 var y = e.Location.Y / resolution;
                 bool validationPassed = ValidateMousePosition(x, y);
                 if (validationPassed)
-                field[x, y] = false;
+                currentField[x, y] = false;
 
             }
         }
-
 
         private bool ValidateMousePosition(int x, int y)
         {
