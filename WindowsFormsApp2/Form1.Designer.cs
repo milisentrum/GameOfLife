@@ -38,6 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.labelProgress = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -58,6 +59,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.labelProgress);
             this.splitContainer1.Panel1.Controls.Add(this.btnstop);
             this.splitContainer1.Panel1.Controls.Add(this.nudDancity);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
@@ -75,7 +77,7 @@
             // btnstop
             // 
             this.btnstop.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnstop.Location = new System.Drawing.Point(18, 335);
+            this.btnstop.Location = new System.Drawing.Point(18, 237);
             this.btnstop.Name = "btnstop";
             this.btnstop.Size = new System.Drawing.Size(137, 38);
             this.btnstop.TabIndex = 5;
@@ -85,7 +87,7 @@
             // 
             // nudDancity
             // 
-            this.nudDancity.Location = new System.Drawing.Point(18, 197);
+            this.nudDancity.Location = new System.Drawing.Point(18, 127);
             this.nudDancity.Maximum = new decimal(new int[] {
             25,
             0,
@@ -110,7 +112,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(35, 156);
+            this.label2.Location = new System.Drawing.Point(46, 90);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 17);
             this.label2.TabIndex = 3;
@@ -118,7 +120,7 @@
             // 
             // nudResolution
             // 
-            this.nudResolution.Location = new System.Drawing.Point(18, 93);
+            this.nudResolution.Location = new System.Drawing.Point(21, 51);
             this.nudResolution.Minimum = new decimal(new int[] {
             1,
             0,
@@ -129,7 +131,7 @@
             this.nudResolution.TabIndex = 2;
             this.nudResolution.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudResolution.Value = new decimal(new int[] {
-            3,
+            4,
             0,
             0,
             0});
@@ -137,7 +139,7 @@
             // btnStart
             // 
             this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnStart.Location = new System.Drawing.Point(18, 268);
+            this.btnStart.Location = new System.Drawing.Point(18, 171);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(137, 38);
             this.btnStart.TabIndex = 1;
@@ -149,7 +151,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(35, 53);
+            this.label1.Location = new System.Drawing.Point(35, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(85, 17);
             this.label1.TabIndex = 0;
@@ -169,6 +171,15 @@
             // 
             this.timer1.Interval = 40;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // labelProgress
+            // 
+            this.labelProgress.AutoSize = true;
+            this.labelProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelProgress.Location = new System.Drawing.Point(35, 289);
+            this.labelProgress.Name = "labelProgress";
+            this.labelProgress.Size = new System.Drawing.Size(0, 17);
+            this.labelProgress.TabIndex = 6;
             // 
             // Form1
             // 
@@ -203,6 +214,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnstop;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label labelProgress;
     }
 }
 

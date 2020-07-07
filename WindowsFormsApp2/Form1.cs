@@ -12,10 +12,12 @@ namespace WindowsFormsApp2
 {
     public partial class Form1 : Form
     {
+        //ToDo
+        // class Cell with properties int X, int Y, Condition
 
         private int resolution;
-        private int[,] currentField;
-        private int[,] newField;
+        private Condition[,] currentField;
+        private Condition[,] newField;
         private Graphics graphics;
         private int rows;
         private int cols;
@@ -44,19 +46,19 @@ namespace WindowsFormsApp2
             rows = pictureBox1.Height / resolution;
             cols = pictureBox1.Width / resolution;
 
-            currentField = new bool[cols, rows];
+            newField = currentField = new Condition[cols, rows];
 
             //первое поколение
             Random rand = new Random();
             for (int x=0; x<cols; x++)
             {
+
+                Condition cond = new Condition();
+               
                 for (int y = 0; y < rows; y++)
                 {
-                    currentField[x, y] = rand.Next((int)nudDancity.Value) == 0;
-                    if (currentField[x, y])
-                    {
-                        //graphics.FillRectangle(Brushes.CornflowerBlue, x * resolution, y * resolution, resolution, resolution);
-                    }
+                   currentField[x, y] = (Condition)Convert.ToInt32(rand.Next((int)nudDancity.Value) == 0);
+                  
                 }
             }
 
@@ -65,39 +67,75 @@ namespace WindowsFormsApp2
 
         private void NextGeneration()
         {
+            //Логика генерации нового поколения
+            int alivedCurrentCells = 0;
+            int alivedNewCells = 0;
+
+
             graphics.Clear(Color.Black);
 
-            bool[,] newField = new bool[cols, rows];
+            newField = new Condition[cols, rows];
 
             for (int x = 0; x < cols; x++)
             {
                 for (int y = 0; y < rows; y++)
                 {
                     int neighbours = CountNeighbours(x, y);
-                    bool hasLife = currentField[x, y];
+
+
+                    bool hasLife = currentField[x, y] == Condition.Alived;
 
                     if (!hasLife && neighbours == 3)
-                        newField[x, y] = true;
+                    {
+                        newField[x, y] = Condition.Alived;
+                        alivedNewCells++;
+                    }
+             
                     else
                     {
                         if (hasLife && (neighbours < 2 || neighbours > 3))
-                            newField[x, y] = false;
+                            newField[x, y] = Condition.NotAlieved;
                         else
+                        {
                             newField[x, y] = currentField[x, y];
+
+                            if (hasLife)
+                                alivedNewCells++;
+                        }
+
+                       
                     }
 
                     if (hasLife)
                     {
                         //отрисовка живой клетки
                         graphics.FillRectangle(Brushes.CornflowerBlue, x * resolution, y * resolution, resolution, resolution);
-                       
+                        alivedCurrentCells++;
+
+
                     }
                 }
             }
 
-            currentField = newField;
-            pictureBox1.Refresh();
-            Text = $"Generation {++currentGeneration}";
+            if (alivedCurrentCells == 0)
+            {
+                labelProgress.Text = $"All cells are died :c";
+                StopGame();
+                pictureBox1.Refresh();
+                btnstop.Visible = false;
+                MessageBox.Show("Клеток больше нет, вы всё уничтожили", "Игра окончена", MessageBoxButtons.OK, MessageBoxIcon.Information);
+               
+            }
+            else
+            {
+                double progress = alivedNewCells * 100 / alivedCurrentCells;
+                labelProgress.Text = $"Progress: {progress}%";
+                currentField = newField;
+                pictureBox1.Refresh();
+                Text = $"Generation {++currentGeneration}";
+
+            }
+
         }
 
         private int CountNeighbours(int x, int y)
@@ -114,7 +152,7 @@ namespace WindowsFormsApp2
                     bool isSelfChecking = col == x && row == y;
 
 
-                    bool hasLife = currentField[col, row];
+                    bool hasLife = currentField[col, row] == Condition.Alived;
 
                     if (hasLife && !isSelfChecking)
                         count++;
@@ -138,6 +176,7 @@ namespace WindowsFormsApp2
         private void btnStart_Click(object sender, EventArgs e)
         {
             StartGame();
+            btnstop.Visible = true;
         }
 
         //Обработка нажатия кнопки Stop
@@ -163,7 +202,7 @@ namespace WindowsFormsApp2
                 var y = e.Location.Y / resolution;
                 bool validationPassed = ValidateMousePosition(x, y);
                 if(validationPassed)
-                 currentField[x, y] = true;
+                 currentField[x, y] = Condition.Alived;
 
             }
 
@@ -173,7 +212,7 @@ namespace WindowsFormsApp2
                 var y = e.Location.Y / resolution;
                 bool validationPassed = ValidateMousePosition(x, y);
                 if (validationPassed)
-                currentField[x, y] = false;
+                currentField[x, y] = Condition.NotAlieved;
 
             }
         }
